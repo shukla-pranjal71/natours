@@ -1,5 +1,6 @@
 /*eslint-disable*/
 const Stripe = require('stripe');
+import { showAlert } from './alert';
 import axios from 'axios';
 
 // export const bookTour = async (tourID) => {
@@ -22,7 +23,7 @@ export const bookTour = async (tourId) => {
   try {
     // 1. Get checkout session from the API
     const session = await axios(`/api/v1/bookings/checkout-session/${tourId}`);
-    console.log(session);
+    // console.log(session);
 
     // 2. Create checkout form + charge credit card
     await stripe.redirectToCheckout({
