@@ -9,6 +9,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controller/errorController');
@@ -27,6 +28,19 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 // GLOBAL MIDDLEWARES
+
+//IMPLEMENT CORS - CROSS ORIGIN RESOURCE SHARING
+app.use(cors());
+// Acces -Contttrol-Allow-Origin *
+// api.natours.com front-end natours.com
+// app.use(
+//   cors({
+//     origin: 'https://www.natours.com',
+//   })
+// );
+
+//Allow for non simple requests : PATCH PUT DELETE
+app.options('*', cors());
 
 app.use(express.static(path.join(__dirname, 'public'))); // Serving Static files
 
